@@ -9,21 +9,24 @@ class BusinessHours extends StatelessWidget {
 
   Widget getBusinessHoursRow(BuildContext context, String begin, String end) {
     final textStyle = Theme.of(context).textTheme.headline3;
-    final row = Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Text(begin, style: textStyle),
-        Expanded(
-          child: Divider(
-            color: PolarmorphColor.black,
-            height: textStyle.height,
-            thickness: 2,
-            indent: 10,
-            endIndent: 10,
+    final row = Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(begin, style: textStyle),
+          Expanded(
+            child: Divider(
+              color: PolarmorphColor.black,
+              height: textStyle.height * textStyle.fontSize,
+              thickness: 2,
+              indent: 10,
+              endIndent: 10,
+            ),
           ),
-        ),
-        Text(end, style: textStyle),
-      ],
+          Text(end, style: textStyle),
+        ],
+      ),
     );
 
     return row;
