@@ -74,6 +74,12 @@
       "languageVersion": "2.9"
     },
     {
+      "name": "flutter_svg",
+      "rootUri": "file:///Users/orpheuspeng/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.18.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/orpheuspeng/git/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -122,6 +128,18 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "path_drawing",
+      "rootUri": "file:///Users/orpheuspeng/.pub-cache/hosted/pub.dartlang.org/path_drawing-0.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "1.19"
+    },
+    {
+      "name": "path_parsing",
+      "rootUri": "file:///Users/orpheuspeng/.pub-cache/hosted/pub.dartlang.org/path_parsing-0.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "1.19"
+    },
+    {
       "name": "path_provider",
       "rootUri": "file:///Users/orpheuspeng/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.11",
       "packageUri": "lib/",
@@ -150,6 +168,12 @@
       "rootUri": "file:///Users/orpheuspeng/.pub-cache/hosted/pub.dartlang.org/pedantic-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.1"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///Users/orpheuspeng/.pub-cache/hosted/pub.dartlang.org/petitparser-3.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
     },
     {
       "name": "platform",
@@ -230,13 +254,19 @@
       "languageVersion": "2.3"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///Users/orpheuspeng/.pub-cache/hosted/pub.dartlang.org/xml-4.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "polarmorph",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-08-12T07:24:55.238978Z",
+  "generated": "2020-08-12T22:03:45.365993Z",
   "generator": "pub",
   "generatorVersion": "2.9.0"
 }
