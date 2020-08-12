@@ -1,0 +1,4 @@
+#Tue Aug 11 22:47:54 PDT 2020
+base.0=/Users/orpheuspeng/git/Polarmorph/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
