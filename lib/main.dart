@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:polarmorph/utils.dart';
 
 import 'theme.dart';
 import 'business_event.dart';
 import 'business_hours.dart';
 import 'business_headline.dart';
-import 'colors.dart';
+import 'business_site_group.dart';
+import 'constants.dart';
 
 void addLicenses() {
   LicenseRegistry.addLicense(() async* {
@@ -39,16 +41,21 @@ class App extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  Widget _getDivider() {
-    return Divider(
-      color: PolarmorphColor.black,
-      height: 20,
-      thickness: 7,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    List<Widget> children = [
+      BusinessHeadline(),
+      BusinessHours(BUSINESS_HOURS),
+      BusinessEvent(BUSINESS_EVENTS),
+      BusinessSiteGroup(BUSINESS_SITES),
+    ];
+
+    children = divideWidgets(
+      children,
+      DividerType.bold,
+      shouldInsertHead: true,
+    );
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -59,17 +66,7 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(15),
-          child: Column(
-            children: <Widget>[
-              this._getDivider(),
-              BusinessHeadline(),
-              this._getDivider(),
-              BusinessHours(),
-              this._getDivider(),
-              BusinessEvent(),
-              this._getDivider(),
-            ],
-          ),
+          child: Column(children: children),
         ),
       ),
     );
