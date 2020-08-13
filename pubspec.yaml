@@ -79,6 +79,9 @@ flutter:
       fonts:
         - asset: assets/font/CabinCondensed-Bold.ttf
           weight: 700
+    - family: Polarmorph-Icon
+      fonts:
+        - asset: assets/font/Polarmorph-Icon.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
