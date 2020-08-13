@@ -2,26 +2,29 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 class BusinessHours extends StatelessWidget {
-  static const START_HOUR = '7AM';
-  static const END_HOUR = '9PM';
-  static const START_DAY = 'MON';
-  static const END_DAY = 'SUN';
+  static const _START_KEY = 'start';
+  static const _END_KEY = 'end';
 
-  Widget getBusinessHoursRow(BuildContext context, String begin, String end) {
-    final textStyle = Theme.of(context).textTheme.headline3;
+  final List<Map<String, String>> _details;
+
+  BusinessHours(this._details, {Key key}) : super(key: key);
+
+  Widget getBusinessHoursRow(Map<String, String> detail, TextStyle style) {
+    final String start = detail[_START_KEY];
+    final String end = detail[_END_KEY];
     final row = Row(
       children: <Widget>[
-        Text(begin, style: textStyle),
+        Text(start, style: style),
         Expanded(
           child: Divider(
             color: PolarmorphColor.black,
-            height: textStyle.height * textStyle.fontSize,
+            height: style.height * style.fontSize,
             thickness: 2,
             indent: 10,
             endIndent: 10,
           ),
         ),
-        Text(end, style: textStyle),
+        Text(end, style: style),
       ],
     );
 
@@ -30,11 +33,13 @@ class BusinessHours extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        this.getBusinessHoursRow(context, START_HOUR, END_HOUR),
-        this.getBusinessHoursRow(context, START_DAY, END_DAY),
-      ],
-    );
+    final List<Widget> children = [];
+    final TextStyle style = Theme.of(context).textTheme.headline3;
+
+    this._details.forEach((Map<String, String> detail) {
+      children.add(this.getBusinessHoursRow(detail, style));
+    });
+
+    return Column(children: children);
   }
 }
