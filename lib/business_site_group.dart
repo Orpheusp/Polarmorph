@@ -5,7 +5,7 @@ import 'constants.dart';
 import 'utils.dart';
 
 class BusinessSiteGroup extends StatelessWidget {
-  final List<Map<BusinessSiteKey, String>> _sites;
+  final List<Map<BusinessSiteKey, dynamic>> _sites;
 
   BusinessSiteGroup(this._sites, {Key key}) : super(key: key);
 

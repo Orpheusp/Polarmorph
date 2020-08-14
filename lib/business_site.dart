@@ -7,7 +7,7 @@ import 'theme.dart';
 import 'utils.dart';
 
 class BusinessSite extends StatelessWidget {
-  final Map<BusinessSiteKey, String> _site;
+  final Map<BusinessSiteKey, dynamic> _site;
 
   BusinessSite(this._site, {Key key}) : super(key: key);
 
@@ -59,7 +59,10 @@ class BusinessSite extends StatelessWidget {
       ),
       getDivider(DividerType.medium),
       ...divideWidgets(detailRows, DividerType.regular),
-      BusinessSiteMap(this._site[BusinessSiteKey.address]),
+      BusinessSiteMap(
+        this._site[BusinessSiteKey.site],
+        this._site[BusinessSiteKey.location],
+      ),
       Container(height: 20),
     ];
 
