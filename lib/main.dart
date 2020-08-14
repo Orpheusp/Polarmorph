@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:polarmorph/utils.dart';
 
-import 'theme.dart';
 import 'business_event.dart';
-import 'business_hours.dart';
 import 'business_headline.dart';
+import 'business_hours.dart';
 import 'business_site_group.dart';
 import 'constants.dart';
+import 'theme.dart';
+import 'utils.dart';
 
 void addLicenses() {
   LicenseRegistry.addLicense(() async* {
@@ -41,8 +42,14 @@ class App extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget _getColumnWrapper(List<Widget> children) {
+    return Container(
+      padding: EdgeInsets.all(15),
+      child: Column(children: children),
+    );
+  }
+
+  Widget _getSingleView() {
     List<Widget> children = [
       BusinessHeadline(),
       BusinessHours(BUSINESS_HOURS),
@@ -56,6 +63,56 @@ class HomePage extends StatelessWidget {
       shouldInsertHead: true,
     );
 
+    return SingleChildScrollView(child: this._getColumnWrapper(children));
+  }
+
+  Widget _getSplitView(BuildContext context) {
+    List<Widget> leftChildren = [
+      BusinessHeadline(),
+      BusinessHours(BUSINESS_HOURS),
+      BusinessEvent(BUSINESS_EVENTS),
+    ];
+
+    leftChildren = divideWidgets(
+      leftChildren,
+      DividerType.bold,
+      shouldInsertHead: true,
+      shouldInsertTail: true,
+    );
+
+    List<Widget> rightChildren = [BusinessSiteGroup(BUSINESS_SITES)];
+
+    Widget left = Expanded(
+      flex: 1,
+      child: this._getColumnWrapper(leftChildren),
+    );
+    Widget right = Expanded(
+      flex: shouldFurtherSplitScreen(context) ? 2 : 1,
+      child: this._getColumnWrapper(rightChildren),
+    );
+
+    return SingleChildScrollView(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [left, right],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final view = shouldSplitScreen(context)
+        ? this._getSplitView(context)
+        : this._getSingleView();
+
+    final body = Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 1080),
+        child: view,
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -63,12 +120,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         brightness: Theme.of(context).brightness,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(15),
-          child: Column(children: children),
-        ),
-      ),
+      body: body,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
+import 'theme.dart';
 
 class BusinessSiteMap extends StatelessWidget {
   final String _address;
@@ -16,7 +17,7 @@ class BusinessSiteMap extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
       child: Text(
         this._address,
-        style: Theme.of(context).textTheme.headline6,
+        style: getTextStyle(context, PolarmorphTextType.headlineSmall),
         textAlign: TextAlign.center,
       ),
       decoration:
