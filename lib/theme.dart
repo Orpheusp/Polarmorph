@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'colors.dart';
+
+enum PolarmorphTextType {
+  headlineLarge,
+  headlineMedium,
+  headlineSmall,
+  subtitle,
+  body,
+}
 
 final polarmorphTextTheme = TextTheme(
   headline1: TextStyle(
@@ -118,3 +127,31 @@ final polarmorphTheme = ThemeData(
   // closer together (more dense) than on mobile platforms.
   visualDensity: VisualDensity.adaptivePlatformDensity,
 );
+
+bool _shouldUseSmallerFont(BuildContext context) {
+  final mediaQuery = MediaQuery.of(context);
+  final width = mediaQuery.size.width;
+  return width <= 360 ||
+      (width > 480 && width <= 720) ||
+      (width > 840 && width <= 1080);
+}
+
+TextStyle getTextStyle(BuildContext context, PolarmorphTextType textType) {
+  final textStyle = Theme.of(context).textTheme;
+  final smaller = {
+    PolarmorphTextType.headlineLarge: textStyle.headline2,
+    PolarmorphTextType.headlineMedium: textStyle.headline4,
+    PolarmorphTextType.headlineSmall: textStyle.headline6,
+    PolarmorphTextType.subtitle: textStyle.subtitle2,
+    PolarmorphTextType.body: textStyle.bodyText2,
+  };
+  final regular = {
+    PolarmorphTextType.headlineLarge: textStyle.headline1,
+    PolarmorphTextType.headlineMedium: textStyle.headline3,
+    PolarmorphTextType.headlineSmall: textStyle.headline5,
+    PolarmorphTextType.subtitle: textStyle.subtitle1,
+    PolarmorphTextType.body: textStyle.bodyText1,
+  };
+
+  return _shouldUseSmallerFont(context) ? smaller[textType] : regular[textType];
+}
