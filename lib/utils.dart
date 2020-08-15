@@ -1,24 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
-
-enum DividerType {
-  regular,
-  medium,
-  bold,
-}
-
-const DividerHeight = {
-  [DividerType.regular]: 10.0,
-  [DividerType.medium]: 10.0,
-  [DividerType.bold]: 20.0,
-};
-
-const DividerThickness = {
-  [DividerType.regular]: 1.0,
-  [DividerType.medium]: 2.0,
-  [DividerType.bold]: 7.0,
-};
+import 'constants.dart';
 
 Divider getDivider(DividerType type) {
   return Divider(
@@ -50,4 +33,14 @@ List<Widget> divideWidgets(
   }
 
   return dividedWidgets;
+}
+
+bool shouldSplitScreen(BuildContext context) {
+  final mediaQuery = MediaQuery.of(context);
+  return mediaQuery.size.width > 480;
+}
+
+bool shouldFurtherSplitScreen(BuildContext context) {
+  final mediaQuery = MediaQuery.of(context);
+  return mediaQuery.size.width > 840;
 }

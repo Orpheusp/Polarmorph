@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+
 import 'colors.dart';
+import 'constants.dart';
+import 'theme.dart';
 
 class BusinessHours extends StatelessWidget {
-  static const _START_KEY = 'start';
-  static const _END_KEY = 'end';
-
-  final List<Map<String, String>> _details;
+  final List<Map<BusinessHourKey, String>> _details;
 
   BusinessHours(this._details, {Key key}) : super(key: key);
 
-  Widget getBusinessHoursRow(Map<String, String> detail, TextStyle style) {
-    final String start = detail[_START_KEY];
-    final String end = detail[_END_KEY];
+  Widget getBusinessHoursRow(
+      Map<BusinessHourKey, String> detail, TextStyle style) {
+    final String start = detail[BusinessHourKey.start];
+    final String end = detail[BusinessHourKey.end];
     final row = Row(
       children: <Widget>[
         Text(start, style: style),
@@ -34,9 +35,9 @@ class BusinessHours extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> children = [];
-    final TextStyle style = Theme.of(context).textTheme.headline3;
+    final style = getTextStyle(context, PolarmorphTextType.headlineMedium);
 
-    this._details.forEach((Map<String, String> detail) {
+    this._details.forEach((Map<BusinessHourKey, String> detail) {
       children.add(this.getBusinessHoursRow(detail, style));
     });
 

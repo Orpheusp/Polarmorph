@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'polarmorph_icon.dart';
 import 'colors.dart';
+import 'constants.dart';
+import 'polarmorph_icon.dart';
+import 'theme.dart';
 import 'utils.dart';
 
 class BusinessEvent extends StatelessWidget {
@@ -26,7 +28,7 @@ class BusinessEvent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [];
-    final fontStyle = Theme.of(context).textTheme.bodyText1;
+    final fontStyle = getTextStyle(context, PolarmorphTextType.body);
 
     for (var i = 0; i < this._events.length; i++) {
       final isLastRow = i == this._events.length - 1;

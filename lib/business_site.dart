@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
-import 'colors.dart';
-import 'utils.dart';
 import 'business_site_map.dart';
+import 'constants.dart';
+import 'theme.dart';
+import 'utils.dart';
 
 class BusinessSite extends StatelessWidget {
-  final Map<String, String> _site;
-
-  static const _SITE_KEY = 'site';
-  static const _ADDRESS_KEY = 'address';
-  static const _PHONE_KEY = 'phone';
-  static const _EMAIL_KEY = 'email';
+  final Map<BusinessSiteKey, dynamic> _site;
 
   BusinessSite(this._site, {Key key}) : super(key: key);
 
-  Row _getDetailRow(String section, String detail, TextStyle style) {
+  Row _getDetailRow(BusinessSiteKey key, String detail, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       // crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Text(
-          section,
+          describeEnum(key),
           style: style,
           textAlign: TextAlign.left,
         ),
@@ -37,14 +34,14 @@ class BusinessSite extends StatelessWidget {
 
   List<Widget> _getDetailRows(TextStyle style) {
     List<Widget> list = [];
-    const order = [_ADDRESS_KEY, _PHONE_KEY, _EMAIL_KEY];
+    const order = [
+      BusinessSiteKey.address,
+      BusinessSiteKey.phone,
+      BusinessSiteKey.email,
+    ];
 
     order.forEach((element) {
-      list.add(this._getDetailRow(
-        element,
-        this._site[element],
-        style,
-      ));
+      list.add(this._getDetailRow(element, this._site[element], style));
     });
 
     return list;
@@ -53,16 +50,19 @@ class BusinessSite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> detailRows =
-        this._getDetailRows(Theme.of(context).textTheme.bodyText1);
+        this._getDetailRows(getTextStyle(context, PolarmorphTextType.body));
 
     List<Widget> children = [
       Text(
-        this._site[_SITE_KEY].toUpperCase(),
-        style: Theme.of(context).textTheme.headline5,
+        this._site[BusinessSiteKey.site].toUpperCase(),
+        style: getTextStyle(context, PolarmorphTextType.headlineSmall),
       ),
       getDivider(DividerType.medium),
       ...divideWidgets(detailRows, DividerType.regular),
-      BusinessSiteMap(this._site[_ADDRESS_KEY]),
+      BusinessSiteMap(
+        this._site[BusinessSiteKey.site],
+        this._site[BusinessSiteKey.location],
+      ),
       Container(height: 20),
     ];
 
